@@ -12,8 +12,15 @@ const keys = require("./keys.js");
 //commands
 
 var action = process.argv[2];
-var songValue=process.argv.splice(3)||"The Sign";
-var movieValue = process.argv.splice(3)|| "Mr. Nobody";
+var songValue = process.argv.slice(3).join(' ');
+
+if (songValue.length === 0)
+    songValue = "The Sign";
+
+var movieValue = process.argv.slice(3).join(' ');
+
+if (movieValue.length === 0)
+    movieValue = "Mr. Nobody";
 
 
 if (action==="my-tweets"){
@@ -96,6 +103,7 @@ function movieThis(movieValue){
 		// });
 	// }
 	
+	    console.log(movieValue);
 	
 		Request("http://www.omdbapi.com/?t=" + movieValue + "&y=&plot=short&r=json&tomatoes=true", function(error, response, body) {
 		 console.log(movieValue);
